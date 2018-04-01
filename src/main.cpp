@@ -54,6 +54,7 @@ void print_help() {
 
   // Then we print general help
   Logger::info << Logger::endl
+
     << "options:" << Logger::endl
     << "  -h,--help      Show this help message" << Logger::endl
     << "  -v,--version   Show the version number of this build" << Logger::endl
@@ -120,7 +121,6 @@ int user_setup(cmdargs &cmd) {
 
 int main(int argc, char *argv[]) {
   command_map = init_autolab_command_map();
-
   cmdargs cmd;
   if (!parse_cmdargs(cmd, argc, argv)) {
     Logger::fatal << "Invalid command line arguments." << Logger::endl
