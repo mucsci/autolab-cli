@@ -36,20 +36,20 @@ configure_file(
 )
 
 # setup external project dependencies
-include(${CMAKE_ROOT}/Modules/ExternalProject.cmake)
+#include(${CMAKE_ROOT}/Modules/ExternalProject.cmake)
 
-ExternalProject_Add(rapidjson
-  PREFIX thirdparty
-  GIT_REPOSITORY https://github.com/Tencent/rapidjson.git
-  GIT_TAG v1.1.0
-  STEP_TARGETS download
-  CONFIGURE_COMMAND true
-  BUILD_COMMAND true
-  INSTALL_COMMAND true
-  TEST_COMMAND true
-  EXCLUDE_FROM_ALL TRUE)
-ExternalProject_Get_Property(rapidjson SOURCE_DIR)
-set(RAPIDJSON_INCLUDE_DIR "${SOURCE_DIR}/include")
+#ExternalProject_Add(rapidjson
+#  PREFIX thirdparty
+#  GIT_REPOSITORY http://github.com/Tencent/rapidjson.git
+#  GIT_TAG v1.1.0
+#  STEP_TARGETS download
+#  CONFIGURE_COMMAND true
+#  BUILD_COMMAND true
+#  INSTALL_COMMAND true
+#  TEST_COMMAND true
+#  EXCLUDE_FROM_ALL TRUE)
+#ExternalProject_Get_Property(rapidjson SOURCE_DIR)
+set(RAPIDJSON_INCLUDE_DIR "${PROJECT_SOURCE_DIR}/build/thirdparty/src/rapidjson/include")
 
 # go into subdirectories
 add_subdirectory(src)
