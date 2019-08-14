@@ -9,4 +9,4 @@ compile_commands.json
 CTestTestfile.cmake
 build
 
-src/app_credentials.h
+#src/app_credentials.h
