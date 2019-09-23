@@ -5,9 +5,10 @@ add_executable(autolab-client
 set_target_properties(autolab-client PROPERTIES OUTPUT_NAME autolab)
 
 target_include_directories(autolab-client
-  PRIVATE . "${PROJECT_BINARY_DIR}")
+  PRIVATE . "${PROJECT_BINARY_DIR}" "${OPENSSL_INCLUDE_DIR}")
+
 
 target_link_libraries(autolab-client
-  autolab logger crypto)
+  autolab logger "${OPENSSL_CRYPTO_LIBRARY}")
 
 install (TARGETS autolab-client DESTINATION bin)

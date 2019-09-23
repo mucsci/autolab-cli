@@ -6,28 +6,18 @@ project(autolab-cli)
 set(VERSION_MAJOR 1)
 set(VERSION_MINOR 0)
 set(VERSION_PATCH 1)
-set(variant "" CACHE STRING "build variant")
 
-# command line options
-option(release "build release version (no debug output)" OFF)
-
-if(NOT release)
-  # build debug
-  set(CMAKE_BUILD_TYPE Debug)
-  set(PRINT_DEBUG TRUE)
-else(NOT release)
-  # build release
-  set(CMAKE_BUILD_TYPE Release)
-  set(PRINT_DEBUG FALSE)
-endif(NOT release)
+set(CMAKE_BUILD_TYPE Release)
+set(PRINT_DEBUG FALSE)
 
 message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
-message(STATUS "Build variant: ${variant}")
 
 # compiler flags
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -Wextra")
 set(CMAKE_CXX_FLAGS_DEBUG "-g")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
+
+find_package(OpenSSL REQUIRED)
 
 # configure a header file to pass the version number to the source code
 configure_file(

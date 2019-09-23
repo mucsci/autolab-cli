@@ -10,12 +10,24 @@ This C++ project has the following dependencies:
 - [libcurl](https://curl.haxx.se/libcurl/): For HTTP operations
 - [rapidjson](https://github.com/Tencent/rapidjson): For JSON processing
 
-CMake is already setup to automatically handle acquiring and setting up rapidjson.
+NOTES:
+
+- CMake is already setup to automatically handle acquiring and setting up rapidjson.
+- CMake will also look for OpenSSL using `find_package` + `REQUIRED`
+- If setting up on macOS, you may need to install openssl through brew
+  
+  ```
+  # then when building with CMake:
+  cd build && cmake -DOPENSSL_ROOT_DIR=/usr/local/opt/openssl ..
+  ```
 
 Please make sure openssl and libcurl libraries are installed prior to building. They can usually be installed with the system's package manager on Linux.
 
-For example, on Ubuntu, users can install these dependencies by running:  
+For example, on Ubuntu, users can install these dependencies by running:
 `sudo apt-get install libssl-dev libcurl4-openssl-dev`
+
+On macOS:
+`brew install openssl curl`
 
 ### Getting Client Credentials
 
