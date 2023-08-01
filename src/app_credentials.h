@@ -16,8 +16,8 @@
 const std::string server_domain = "https://autolab.millersville.edu";
 
 /* The client_id and client_secret generated when registering the app */
-const std::string client_id = "c6552fcc3ae736a0a95833bef6b43207d2c71a4100b5c7927ae0e7a57e5e88c3";
-const std::string client_secret = "bf9240c8c43a4ee6b26da2e4a4bfdad2d7fac2d07429399d7bb16baa3a62d728";
+const std::string client_id = "tilE7u3Lg4vKpH5rxs4VfB27VuPvj9oKxaGTuzXIvdI";
+const std::string client_secret = "Zf5MFBSbnnoYrNkBGGmTo1EpessvUXMtWLMvQcPH-as";
 
 /* The redirect uri used when registering the app.
  * For clients that use device_flow, this should have been
@@ -32,7 +32,7 @@ const std::string redirect_uri = "https://autolab.millersville.edu/device_flow_a
  * For safety reasons, please keep these declarations as macros instead of
  * variables.
  */
-#define crypto_key ((unsigned char *)"EnterYourVerySecretCryptoKeyHere")
-#define crypto_iv  ((unsigned char *)"YourVerySecretIV")
+#define crypto_key ((unsigned char *)"l4$bl0|/0o(4be5P~\"1r\"iO4:1oWtn)p")
+#define crypto_iv  ((unsigned char *)"P03HB6-]!3kh,\"{3")
 
 #endif /* AUTOLAB_APP_CREDENTIALS_H_ */
