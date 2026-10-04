@@ -57,20 +57,22 @@ configure_file(
   "${PROJECT_BINARY_DIR}/build_config.h"
 )
 
-# setup external project dependencies
-#include(${CMAKE_ROOT}/Modules/ExternalProject.cmake)
+# Set up the header-only RapidJSON dependency.  The autolab target below
+# depends on the generated `rapidjson-download` step, so this declaration
+# must remain active.
+include(${CMAKE_ROOT}/Modules/ExternalProject.cmake)
 
-#ExternalProject_Add(rapidjson
-#  PREFIX thirdparty
-#  GIT_REPOSITORY https://github.com/Tencent/rapidjson.git
-#  GIT_TAG v1.1.0
-#  STEP_TARGETS download
-#  CONFIGURE_COMMAND true
-#  BUILD_COMMAND true
-#  INSTALL_COMMAND true
-#  TEST_COMMAND true
-#  EXCLUDE_FROM_ALL TRUE)
-#ExternalProject_Get_Property(rapidjson SOURCE_DIR)
+ExternalProject_Add(rapidjson
+  PREFIX thirdparty
+  GIT_REPOSITORY https://github.com/Tencent/rapidjson.git
+  GIT_TAG v1.1.0
+  STEP_TARGETS download
+  CONFIGURE_COMMAND true
+  BUILD_COMMAND true
+  INSTALL_COMMAND true
+  TEST_COMMAND true
+  EXCLUDE_FROM_ALL TRUE)
+ExternalProject_Get_Property(rapidjson SOURCE_DIR)
 set(RAPIDJSON_INCLUDE_DIR "${SOURCE_DIR}/include")
 
 # go into subdirectories
