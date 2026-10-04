@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.5)
 
 project(autolab-cli)
 
@@ -11,15 +11,20 @@ set(variant "" CACHE STRING "build variant")
 # command line options
 option(release "build release version (no debug output)" OFF)
 
-if(NOT release)
-  # build debug
-  set(CMAKE_BUILD_TYPE Debug)
+# Existing CMAKE_BUILD_TYPE takes priority if directly defined
+if(NOT CMAKE_BUILD_TYPE)
+  if(release)
+    set(CMAKE_BUILD_TYPE Release)
+  else()
+    set(CMAKE_BUILD_TYPE Debug)
+  endif()
+endif()
+
+if(CMAKE_BUILD_TYPE MATCHES Debug)
   set(PRINT_DEBUG TRUE)
-else(NOT release)
-  # build release
-  set(CMAKE_BUILD_TYPE Release)
+else()
   set(PRINT_DEBUG FALSE)
-endif(NOT release)
+endif()
 
 message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
 message(STATUS "Build variant: ${variant}")
@@ -28,6 +33,23 @@ message(STATUS "Build variant: ${variant}")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -Wextra -fpermissive")
 set(CMAKE_CXX_FLAGS_DEBUG "-g")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
+
+# For OS X
+if (CMAKE_HOST_SYSTEM_NAME MATCHES "Darwin")
+  execute_process(
+    COMMAND brew --prefix openssl
+    RESULT_VARIABLE BREW_OPENSSL
+    OUTPUT_VARIABLE BREW_OPENSSL_PREFIX
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+  )
+  if (BREW_OPENSSL EQUAL 0 AND EXISTS "${BREW_OPENSSL_PREFIX}")
+    message(STATUS "OpenSSL keg: ${BREW_OPENSSL_PREFIX}")
+    include_directories("${BREW_OPENSSL_PREFIX}/include")
+    link_libraries("-L${BREW_OPENSSL_PREFIX}/lib")
+  else()
+    message(FATAL_ERROR "OpenSSL keg not found")
+  endif()
+endif()
 
 # configure a header file to pass the version number to the source code
 configure_file(
